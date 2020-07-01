@@ -1,0 +1,84 @@
+package package1;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+
+public class Main {
+    public void SetName(ArrayList<String> arr1,int i,String s)//Η συνάρτηση της κλάσης Main SetName παίρνει 3 παραμέτρους: μία λίστα, έναν αριθμό και ένα όνομα.
+    {
+        Scanner scan= new Scanner(System.in);
+        System.out.println("Enter the index of the list");
+        i=Integer.parseInt(scan.nextLine());
+        System.out.println("Enter the replacement string");
+        s=scan.nextLine();
+        arr1.set(i,s);//Αντικαθιστά την τιμή του στοιχείου i του πίνακα με την τιμή s
+    }
+    public String GetCity(ArrayList<String> arr1,int i)
+    {
+        return arr1.get(i);//Σου επιστρέφει το στοιχείο i του πίνακα που έχουμε δώσει στις παραμέτρους
+    }
+    static ArrayList<String> file_A_cities=new ArrayList<>();//Η λίστα με τις πόλεις του πρώτου δωσμένου αρχείου
+    static ArrayList<String> file_B_cities=new ArrayList<>();//Η λίστα με τις πόλεις του δεύτερου δωσμένου αρχείου
+    public static void main(String[] args) throws FileNotFoundException {
+
+        BasicSetOperations bso=new BasicSetOperations();//Δημιουργούμε αντικείμενο της κλάσης BasicSetOperations
+        AdvancedSetOperations ado=new AdvancedSetOperations();//Δημιουργούμε αντικείμενο της κλάσης AdvancedSetOperations
+        Main m=new Main();//Δημιουργούμε αντικείμενο της κλάσης Main
+        Scanner scanforfile= new Scanner(System.in);//Είσοδος από το πληκτρολόγιο
+        System.out.println("Enter file_A name: ");
+        String file1=scanforfile.nextLine();
+        System.out.println("Enter file_B name: ");
+        String file2=scanforfile.nextLine();
+        try
+        {
+            File file_A=new File("C:\\Users\\marym\\OneDrive\\Υπολογιστής\\"+file1+".txt");//Το path του πρώτου αρχείου
+            File file_B=new File("C:\\Users\\marym\\OneDrive\\Υπολογιστής\\"+file2+".txt");//Το path του δεύτερου αρχείου
+            Scanner reader_file_A = new Scanner(file_A);//Δέχεται το πρώτο αρχείο
+            Scanner reader_file_B = new Scanner(file_B);//Δέχεται το δεύτερο αρχείο
+            while(reader_file_A.hasNextLine())
+            {
+                m.file_A_cities.add(reader_file_A.nextLine());//Διαβάζει το πρώτο αρχείο
+            }
+            while(reader_file_B.hasNextLine())
+            {
+                m.file_B_cities.add(reader_file_B.nextLine());;//Διαβάζει το δεύτερο αρχείο
+            }
+
+        } catch (FileNotFoundException e) {//Βγάζει σφάλμα αν δε βρει τα αρχεία που δώσαμε
+            System.out.println("File not found. Please set a valid path. We are using default files instead");
+            System.out.println( System.lineSeparator() );
+        }
+        finally//Αν δεν υπάρχουν τα αρχεία με τα ονόματα και το path που δώσαμε επιστρέφει σε 2 default αρχεία που έχουμε δημιουργήσει
+        {
+            try {
+                File file_A = new File("C:\\Users\\marym\\OneDrive\\Υπολογιστής\\file_A.txt");
+                File file_B = new File("C:\\Users\\marym\\OneDrive\\Υπολογιστής\\file_B.txt");
+                Scanner reader_file_A = new Scanner(file_A);
+                Scanner reader_file_B = new Scanner(file_B);
+                while (reader_file_A.hasNextLine()) {
+                    m.file_A_cities.add(reader_file_A.nextLine());
+                }
+                while (reader_file_B.hasNextLine()) {
+                    m.file_B_cities.add(reader_file_B.nextLine());
+                }
+            }
+            catch(FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        m.file_A_cities.set(5,"Δουβλίνο");
+        String getcity=m.GetCity(m.file_B_cities,1);
+        System.out.println(getcity);
+        bso.union(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση union της κλάσης BasicSetOperations
+        bso.intersection(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση intersection της κλάσης BasicSetOperations
+        bso.symmetricDifference(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση symmetricDifference της κλάσης BasicSetOperations
+        ado.union(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση union της κλάσης AdvancedSetOperations
+        ado.intersection(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση intersection της κλάσης AdvancedSetOperations
+        ado.symmetricDifference(m.file_A_cities,m.file_B_cities);//Καλεί την συνάρτηση symmetricDifference της κλάσης AdvancedSetOperations
+        ado.superSet(m.file_A_cities,m.file_B_cities);//Καλεί τη συνάρτηση superSet tης κλάσης AdvancedSetOperations
+        ado.subSet(m.file_A_cities,m.file_B_cities);//Καλεί τη συνάρτηση subSet tης κλάσης AdvancedSetOperations
+    }
+}
