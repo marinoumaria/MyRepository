@@ -1,0 +1,52 @@
+package package1;
+
+import java.util.ArrayList;
+
+public class AdvancedSetOperations  extends BasicSetOperations{
+    AdvancedSetOperations()
+    {
+        System.out.println("My father is BasicSetOperations. Im his child class");
+    }
+    public void superSet(ArrayList<String> file1, ArrayList<String> file2)//Δέχεται στα ορίσματα 2 πίνακες
+    {
+        int counter=0;
+        for(int i=0;i<file1.size();i++)
+        {
+            for(int j=0;j<file2.size();j++)
+            {
+                if(file1.get(i).equals(file2.get(j)))
+                {
+                    counter++;
+                }
+            }
+        }//Μετράει πόσα κοινά στοιχεία έχει με τον πίνακα 2
+        if(counter>=file1.size()&&(file1.size())>=(file2.size())) {
+            System.out.println("Το πρώτο αρχείο είναι υπερσύνολο του δεύτερου");//Αν τα κοινά στοιχεία είναι ίδιου πλήθους με το μέγεθος του πίνακα τότε δεν υποσύνολο
+        }
+        else
+        {
+            System.out.println("Το πρώτο αρχείο δεν είναι υπερσύνολο του δεύτερου");////Αν τα κοινά στοιχεία δεν είναι ίδιου πλήθους με το μέγεθος του πίνακα τότε δεν είναι υποσύνολο
+        }
+    }
+    public void subSet(ArrayList<String> file1, ArrayList<String> file2)
+    {
+        int counter=0;
+        for(int i=0;i<file2.size();i++)
+            {
+                for(int j=0;j<file1.size();j++)
+            {
+                if(file2.get(i).equals(file1.get(j)))
+                {
+                    counter++;
+                }
+            }
+        }
+        if(counter>=file2.size()&&(file2.size()>=file1.size())) {
+            System.out.println("Το πρώτο αρχείο είναι υποσύνολο του δεύτερου");//Αν τα κοινά στοιχεία είναι ίδιου πλήθους με το μέγεθος του πίνακα τότε είναι υπερσύνολο
+        }
+        else
+        {
+            System.out.println("Το πρώτο αρχείο δεν είναι υποσύνολο του δεύτερου");//Αν τα κοινά στοιχεία δεν είναι ίδιου πλήθους με το μέγεθος του πίνακα τότε δεν είναι υπερσύνολο
+        }
+    }
+}
