@@ -1,0 +1,57 @@
+package package1;
+import java.util.*;
+
+public class BasicSetOperations {
+    BasicSetOperations()
+    {
+        System.out.println("This is the parent class named BasicSetOperations");
+    }
+    public  void union(ArrayList<String> file1,ArrayList<String> file2)//Η κλάση union έχει σαν ορίσματα 2 πίνακες
+    {
+        ArrayList<String> union=new ArrayList<>();//Δημιουργεί τον τελικό πίνακα που θα μπει η ένωση των 2 πινάκων
+        union.addAll(file1);
+        for(int i=0;i<file2.size();i++)
+        {
+            if(!union.contains(file2.get(i)))
+            {
+                union.add(file2.get(i));
+            }
+        }//Αφαιρεί τα διπλότυπα από τους 2 πίνακες
+        Collections.sort(union);//Ταξινομεί τους πίνακες αλφαβητικά(δε χρειαζόταν αλλά είναι καλύτερα έτσι)
+        System.out.println(union);//Εμφανίζει στην οθόνη το τελικό αποτέλεσμα
+    }
+    public  void intersection(ArrayList<String> file1,ArrayList<String> file2) {//Η κλάση intersection έχει σαν ορίσματα 2 πίνακες
+        ArrayList<String> intersection=new ArrayList<>();//Ο πίνακας που θα φιλοξενήσει την τομή
+        for(int i=0;i<file1.size();i++) {
+            for(int j=0;j<file2.size();j++)
+            {
+                if(file1.get(i).equals(file2.get(j)))
+                {
+                    intersection.add(file1.get(i));
+                }
+            }
+        }//Εισάγει μόνο τα κοινά μεταξύ των πινάκων
+        Collections.sort(intersection);//Και εδώ ταξινόμηση
+        System.out.println(intersection);//Εμφανίζει στην οθόνη το τελικό αποτέλεσμα
+    }
+    public  void symmetricDifference(ArrayList<String> file1,ArrayList<String> file2) {//Η κλάση symmetricDifference έχει σαν ορίσματα 2 πίνακες
+        ArrayList<String> symmetricDifference=new ArrayList<>();//Ο πίνακας που θα φιλοξενήσει την συμμετρική διαφορά
+        symmetricDifference.addAll(file1);
+        symmetricDifference.addAll(file2);
+        ArrayList<String> intersection=new ArrayList<>();
+        for(int i=0;i<file1.size();i++) {
+            for(int j=0;j<file2.size();j++)
+            {
+                if(file1.get(i).equals(file2.get(j)))
+                {
+                    intersection.add(file1.get(i));
+                }
+            }
+        }//Εισάγει όλες τις πόλεις εκτός από τις κοινές μεταξύ των 2 πινάκων
+        symmetricDifference.removeAll(intersection);
+        Collections.sort(symmetricDifference);//Και εδώ πάλι ταξινόμηση
+        System.out.println(symmetricDifference);//Εμφανίζει στην οθόνη το τελικό αποτέλεσμα
+
+    }
+
+}
